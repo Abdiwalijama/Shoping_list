@@ -1,37 +1,25 @@
-const productList = document.querySelector("#productList");
-const productInput = document.querySelector("#productInput");
-const productSubmitBtn = document.querySelector("#productSubmit");
-const productRemove = document.querySelector("#productRemove");
+const inputText = document.querySelector("#text");
+const myBtn = document.querySelector(".btn-list");
+const list = document.querySelector(".container ul");
 
-const products = ["melk", "saft", "egg", "frokostblanding"];
-
-productSubmitBtn.addEventListener("click", addProduct);
-
-function addProduct() {
-	console.log(productInput.value);
-	products.push(productInput.value);
-
-	productList.innerHTML = "";
-	productInput.value = "";
-
-	for (let i = 0; i < products.length; i++) {
-		productList.innerHTML += `<li>${products[i]}</li>`;
-	}
-}
-
-for (let i = 0; i < products.length; i++) {
-	productList.innerHTML += `<li>${products[i]}</li>`;
-}
-
-productRemove.addEventListener("click", remove);
-
-function remove (){
-	products.pop(productList.value);
-	console.log(productList.value)
-	productList.innerHTML = "";
-
-	for (let i = 0; i < products.length; i++) {
-	productList.innerHTML += `<li>${products[i]}</li>`;
-}
-	
-}
+myBtn.addEventListener("click", (e)=>{
+    if(inputText.value !=""){
+        e.preventDefault();
+        // Create li
+        const myLi = document.createElement("li");
+        myLi.innerHTML = inputText.value;
+        list.appendChild(myLi);
+        // Create Span
+        const mySpan = document.createElement("span");
+        mySpan.innerHTML = "x";
+        myLi.appendChild(mySpan);
+    }
+    const close = document.querySelectorAll("span");
+    for(let i = 0; i<close.length; i++){
+        close[i].addEventListener("click", ()=>{
+            close[i].parentElement.style.display ="none"
+        })
+        
+    }
+    inputText.value ="";
+});
